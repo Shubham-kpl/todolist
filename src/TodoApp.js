@@ -36,14 +36,11 @@ export default function ToDoApp() {
     if (task == ``) {
       return handleFormError(e);
     }
-    console.log("called");
-    console.log(tasks);
     setTasks([
       ...tasks,
       { id: new Date().toISOString(), name: task, done: 0, pin: 0 },
     ]);
     setTask(``);
-    // console.log(tasks);
   }
 
   function calcErrorMessage() {
@@ -131,7 +128,6 @@ export default function ToDoApp() {
     setTask(inputTask.value);
     setTasks(
       tasks.filter((val) => {
-        console.log(val.id, taskId);
         return val.id !== taskId;
       })
     );
@@ -145,7 +141,6 @@ export default function ToDoApp() {
   }
 
   document.body.addEventListener(`keydown`, function (e) {
-    // // console.log(e.key);
     if (e.key === `Delete`) {
       if (!e.target.closest(`.task`)) {
         if (tasks.length > 0) {
@@ -174,8 +169,7 @@ export default function ToDoApp() {
     }
   });
 
-  // function addPin(clickedTask, clickedEl) {
-  //   console.log(this);
+  // function addPin(clickedTask, clickedEl)
   //   clickedEl.classList.add(`task--pin`);
   //   clickedTask.pin = 1;
   //   // clickedEl.insertAdjacentHTML(
@@ -236,9 +230,8 @@ export default function ToDoApp() {
     // setSort(1 - sort);
 
     // only increasing
-    console.log(this);
+
     dummyTasks.sort((a, b) => a[this].localeCompare(b[this]));
-    console.log(dummyTasks);
     setTasks([...dummyTasks]);
   }
 

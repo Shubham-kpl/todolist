@@ -11,6 +11,10 @@
     padding: 0;
 }
 
+.task__container button {
+    margin-right: 0.4rem;
+    margin-bottom: 0.5rem;
+}
 
 .task {
     display: flex;

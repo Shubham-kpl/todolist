@@ -6,6 +6,7 @@ import Form from "./Form";
 // localStorage.removeItem(`tasks`);
 
 let count = 0;
+console.log("Hello");
 
 const getLocalTasks = () => {
   let list = localStorage.getItem(`tasks`);

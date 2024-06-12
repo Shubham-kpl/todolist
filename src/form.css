@@ -1,0 +1,64 @@
+.form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.form input:focus {
+    outline: 2px solid blue;
+}
+
+.form__input {
+    /* display: flex; */
+    width: 45%;
+    align-items: center;
+    position: relative;
+    margin: 0;
+}
+
+.form__input--task {
+    width: 100%;
+    height: 2.1rem;
+    border: transparent;
+    padding: 0;
+    padding-left: 10px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
+    font-size: 1.25rem;
+}
+
+.form__input--submit {
+    padding: 0;
+    height: 2.1rem;
+    width: 100%;
+    font-size: 1.25rem;
+}
+
+.form__input--error {
+    content: "Enter a valid task";
+    outline: 2px solid red;
+    transition: 0.1s ease;
+}
+
+.message--error {
+    justify-self: flex-start;
+    color: red;
+    position: absolute;
+    left: 0;
+    /* transition: 0.5s ease-in-out; */
+}
+
+/* .form__input input {
+    transition: 1s ease-in-out;
+} */
+
+/* .form__input--title {
+    min-width: fit-content;
+    margin-right: 1rem;
+    position: absolute;
+    transition: 1s ease-in-out;
+}
+
+.form__input input:focus~.form__input--title {
+    transform: translate(-50px, -40px);
+} */

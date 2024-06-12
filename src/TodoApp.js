@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import "./style.css";
 import "./tasks.css";
+import "./container.css";
 import Form from "./Form";
 
 // localStorage.removeItem(`tasks`);
 
 let count = 0;
-console.log("Hello");
+let edit = 0;
 
 const getLocalTasks = () => {
   let list = localStorage.getItem(`tasks`);
@@ -16,9 +17,9 @@ const getLocalTasks = () => {
 };
 
 export default function ToDoApp() {
-  const [task, setTask] = useState(``);
-  const [tasks, setTasks] = useState(getLocalTasks());
-  const [sort, setSort] = useState(0);
+  let [task, setTask] = useState(``);
+  let [tasks, setTasks] = useState(getLocalTasks());
+  let [sort, setSort] = useState(0);
 
   // Handle Form
 
@@ -33,6 +34,8 @@ export default function ToDoApp() {
     if (task == ``) {
       return handleFormError(e);
     }
+    console.log("called");
+    console.log(tasks);
     setTasks([
       ...tasks,
       { id: new Date().toISOString(), name: task, done: 0, pin: 0 },
@@ -71,80 +74,66 @@ export default function ToDoApp() {
   function handleTaskClick(e) {
     const clickedEl = e.target.closest(`.task--details`);
 
-    if (clickedEl.pin === 1) return;
+    clickedEl.classList.toggle(`task--done`);
 
-    if (!clickedEl.classList.contains(`task--done`)) {
-      clickedEl.classList.add(`task--done`);
-      tasks.forEach(function (val) {
-        if (e.target.value === val.id) val.done = 1;
-      });
-    } else {
-      // console.log(clickedEl.value);
-      clickedEl.classList.remove(`task--done`);
-      tasks.forEach(function (val) {
-        if (clickedEl.value === val.id) val.done = 0;
-      });
-    }
+    tasks.forEach(function (task) {
+      if (clickedEl.value === task.id) task.done ^= 1;
+    });
+
     setTasks([...tasks]);
   }
 
   function handleTaskDoubleClick(e) {
     const clickedEl = e.target.closest(`.task--details`);
+    clickedEl.classList.toggle(`task--pin`);
 
-    const clickedTask = tasks.find((val) => val.id === clickedEl.value);
-    // if(clickedTask.done === 1)
-    // console.log(clickedTask.pin);
+    tasks.forEach(function (task) {
+      if (clickedEl.value === task.id) {
+        task.pin ^= 1;
+      } else task.pin = 0;
+    });
 
-    if (clickedTask.pin === 1) {
-      clickedTask.pin = 0;
-      clickedEl.classList.remove(`task--pin`);
-      // clickedEl.firstElementChild.remove();
-    } else {
-      clickedEl.classList.add(`task--pin`);
-      clickedTask.pin = 1;
-      // addPin(clickedTask, clickedEl);
-    }
+    const idx = tasks.findIndex((task) => task.id === clickedEl.value);
+
+    if (tasks[idx].pin == 0) return;
+
+    for (let i = idx; i >= 1; i--)
+      [tasks[i], tasks[i - 1]] = [tasks[i - 1], tasks[i]];
     setTasks([...tasks]);
   }
 
   function handleTaskUp(e) {
     // if already the first element
-    if (
-      e.target.parentElement === e.target.closest(`.tasks`).firstElementChild
-    ) {
-      return;
-    }
+    const taskId = e.target.value;
+    if (taskId === tasks[0].id) return;
 
-    const value = e.target.value;
-
-    const arr = [...e.target.closest(`.tasks`).querySelectorAll(`.task`)];
-
-    const idx = arr.findIndex((val, i) =>
-      val.classList.contains(`button-${value}`)
-    );
-
-    arr[idx - 1].insertAdjacentElement(`beforebegin`, arr[idx]);
+    const idx = tasks.findIndex((task) => task.id === taskId);
+    [tasks[idx], tasks[idx - 1]] = [tasks[idx - 1], tasks[idx]];
+    setTasks([...tasks]);
   }
 
   function handleTaskDown(e) {
-    if (
-      e.target.parentElement === e.target.closest(`.tasks`).lastElementChild
-    ) {
-      return;
-    }
+    const taskId = e.target.value;
+    if (taskId === tasks[tasks.length - 1].id) return;
 
-    const value = e.target.value;
-
-    const arr = [...e.target.closest(`.tasks`).querySelectorAll(`.task`)];
-
-    const idx = arr.findIndex((val, i) =>
-      val.classList.contains(`button-${value}`)
-    );
-
-    arr[idx + 1].insertAdjacentElement(`afterend`, arr[idx]);
+    const idx = tasks.findIndex((task) => task.id === taskId);
+    [tasks[idx], tasks[idx + 1]] = [tasks[idx + 1], tasks[idx]];
+    setTasks([...tasks]);
   }
 
-  function handleTaskEdit(e) {}
+  function handleTaskEdit(e) {
+    const inputTask = document.querySelector(`.form__input--task`);
+    const taskId = e.target.value;
+    inputTask.value = e.target.name;
+    inputTask.focus();
+    setTask(inputTask.value);
+    setTasks(
+      tasks.filter((val) => {
+        console.log(val.id, taskId);
+        return val.id !== taskId;
+      })
+    );
+  }
 
   function handleTaskDelete(e) {
     const taskToDelete = tasks.find((val) => {
@@ -218,7 +207,6 @@ export default function ToDoApp() {
   }, [tasks]);
 
   function formatDate(date) {
-    // console.log(new Date().toISOString().slice(0, 10), date.slice(0, 10));
     if (new Date().toISOString().slice(0, 10) === date.slice(0, 10))
       return ` Today`;
     if (
@@ -233,15 +221,21 @@ export default function ToDoApp() {
     ${new Date(date).getFullYear()}`;
   }
 
-  function handleTasksSort(comparer) {
+  function handleTasksSort() {
     let dummyTasks = tasks;
-    dummyTasks.sort((a, b) => {
-      return sort === 0
-        ? a[this].localeCompare(b[this])
-        : b[this].localeCompare(a[this]);
-    });
+
+    // // sort in both orders
+    // dummyTasks.sort((a, b) => {
+    //   return sort === 0
+    //     ? a[this].localeCompare(b[this])
+    //     : b[this].localeCompare(a[this]);
+    // });
+    // setTasks(dummyTasks);
+    // setSort(1 - sort);
+
+    // only increasing
+    dummyTasks.sort((a, b) => b[this].localeCompare(a[this]));
     setTasks(dummyTasks);
-    setSort(1 - sort);
   }
 
   return (
@@ -249,66 +243,75 @@ export default function ToDoApp() {
       {/* <button onClick={celebrate}>Complete Task</button>
       <div id=`confetti-container`></div> */}
       <h1>ToDo App</h1>
-
       <Form
         handleFormChange={handleFormChange}
         handleFormSubmit={handleFormSubmit}
         handleFormClick={handleFormClick}
         task={task}
       ></Form>
-
       <div className={`tasks__completed`}>
         <h3>{`TASKS COMPLETED: `}</h3>
         <span className={`tasks__completed--number`}>
           {`${countDoneTasks(tasks)} / ${tasks.length}`}
         </span>
       </div>
-
+      <div className="task__alert--delete hidden">
+        Are you sure! <br />
+        <span className="task__alert--options">
+          <button className="button--mini button--yes">Yes</button>
+          <button className="button--mini button--no">No</button>
+        </span>
+      </div>
       <div className="task__container">
         <ul className={`tasks`}>
           {tasks.map((val) => {
             return (
               <>
-                <li key={val.id} className={`task button button-${val.id}`}>
+                <li key={val.id} className={`task task-${val.id}`}>
                   <button
-                    className={`task--details ${
-                      val.done == 1 ? `task--done` : ``
-                    }  
-                  ${val.pin == 1 ? `task--pin` : ``}`}
+                    className={`button task--details 
+                      ${val.done == 1 ? `task--done ` : ``}
+                      ${val.pin == 1 ? `task--pin ` : ``}`}
                     value={val.id}
                     onClick={handleTaskClick}
                     onDoubleClick={handleTaskDoubleClick}
+                    name={`${val.name}`}
                   >
+                    {val.pin === 1 ? <span> 📌 Task pinned</span> : ``}
+                    {val.done === 1 ? <span> 🎉 Task completed</span> : ``}
                     <span className={`task--name`}>{val.name}</span>
                     <span className={`task--date-added`}>
                       Date added:{formatDate(val.id)}
                     </span>
                   </button>
                   <button
-                    className={`task--up`}
+                    className={`button task--up`}
                     value={val.id}
                     onClick={handleTaskUp}
                   >
                     up
                   </button>{" "}
                   <button
-                    className={`task--down`}
+                    className={`button task--down`}
                     value={val.id}
                     onClick={handleTaskDown}
+                    name={`${val.name}`}
                   >
                     down
                   </button>
                   <button
-                    className={`task--edit`}
+                    className={`button task--edit`}
                     value={val.id}
                     onClick={handleTaskEdit}
+                    name={`${val.name}`}
                   >
                     edit
                   </button>
                   <button
-                    className={`task--delete`}
+                    className={`button task--delete`}
                     value={val.id}
                     onClick={handleTaskDelete}
+                    name={`${val.name}`}
                   >
                     X
                   </button>
@@ -318,7 +321,7 @@ export default function ToDoApp() {
           })}
           <div className="sort__container">
             <button
-              className={`tasks--sort`}
+              className={`button tasks--sort`}
               onClick={handleTasksSort.bind("name")}
             >
               Sort

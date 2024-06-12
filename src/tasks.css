@@ -10,13 +10,6 @@
     margin-top: 1.5rem;
 }
 
-button {
-    height: 3rem;
-    border-radius: 4px;
-    min-width: 2.3rem;
-    margin-right: 0.4rem;
-    margin-bottom: 0.5rem;
-}
 
 .task {
     display: flex;
@@ -90,4 +83,8 @@ button {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.task__alert--delete {
+    transition: 0.3s ease-in-out;
 }

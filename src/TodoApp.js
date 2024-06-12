@@ -95,10 +95,10 @@ export default function ToDoApp() {
 
     const idx = tasks.findIndex((task) => task.id === clickedEl.value);
 
-    if (tasks[idx].pin == 0) return;
+    if (tasks[idx].pin !== 0)
+      for (let i = idx; i >= 1; i--)
+        [tasks[i], tasks[i - 1]] = [tasks[i - 1], tasks[i]];
 
-    for (let i = idx; i >= 1; i--)
-      [tasks[i], tasks[i - 1]] = [tasks[i - 1], tasks[i]];
     setTasks([...tasks]);
   }
 

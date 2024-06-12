@@ -16,6 +16,9 @@ const getLocalTasks = () => {
   else return [];
 };
 
+let clickTimeout;
+let CLICK_DELAY = 250;
+
 export default function ToDoApp() {
   let [task, setTask] = useState(``);
   let [tasks, setTasks] = useState(getLocalTasks());
@@ -273,7 +276,7 @@ export default function ToDoApp() {
                       ${val.done == 1 ? `task--done ` : ``}
                       ${val.pin == 1 ? `task--pin ` : ``}`}
                     value={val.id}
-                    onClick={handleTaskClick}
+                    onClick={setTimeout(handleTaskClick, CLICK_DELAY)}
                     onDoubleClick={handleTaskDoubleClick}
                     name={`${val.name}`}
                   >

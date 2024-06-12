@@ -22,7 +22,6 @@ let CLICK_DELAY = 250;
 export default function ToDoApp() {
   let [task, setTask] = useState(``);
   let [tasks, setTasks] = useState(getLocalTasks());
-  let [sort, setSort] = useState(0);
 
   // Handle Form
 
@@ -276,11 +275,11 @@ export default function ToDoApp() {
                       ${val.done == 1 ? `task--done ` : ``}
                       ${val.pin == 1 ? `task--pin ` : ``}`}
                     value={val.id}
-                    onClick={setTimeout(handleTaskClick, CLICK_DELAY)}
+                    onClick={handleTaskClick}
                     onDoubleClick={handleTaskDoubleClick}
                     name={`${val.name}`}
                   >
-                    {val.pin === 1 ? <span> 📌 Task pinned</span> : ``}
+                    {val.pin === 1 ? <span> 📌 </span> : ``}
                     {val.done === 1 ? <span> 🎉 Task completed</span> : ``}
                     <span className={`task--name`}>{val.name}</span>
                     <span className={`task--date-added`}>

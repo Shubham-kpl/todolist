@@ -8,6 +8,7 @@
     width: 100%;
     box-sizing: border-box;
     margin-top: 1.5rem;
+    padding: 0;
 }
 
 
@@ -24,6 +25,10 @@
     padding: 0 30px;
     align-items: center;
     justify-content: space-between;
+}
+
+.task button {
+    /* align-items: center; */
 }
 
 .task button:active {

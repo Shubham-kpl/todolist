@@ -225,8 +225,10 @@ export default function ToDoApp() {
     // setSort(1 - sort);
 
     // only increasing
-
-    dummyTasks.sort((a, b) => a[this].localeCompare(b[this]));
+    dummyTasks.sort((a, b) => {
+      if (a.pin === 1 || b.pin === 1) return;
+      else a[this].localeCompare(b[this]);
+    });
     setTasks([...dummyTasks]);
   }
 

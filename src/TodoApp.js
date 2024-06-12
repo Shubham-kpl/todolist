@@ -122,15 +122,10 @@ export default function ToDoApp() {
 
   function handleTaskEdit(e) {
     const inputTask = document.querySelector(`.form__input--task`);
-    const taskId = e.target.value;
     inputTask.value = e.target.name;
     inputTask.focus();
     setTask(inputTask.value);
-    setTasks(
-      tasks.filter((val) => {
-        return val.id !== taskId;
-      })
-    );
+    handleTaskDelete(e);
   }
 
   function handleTaskDelete(e) {

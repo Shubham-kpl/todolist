@@ -2,6 +2,10 @@
 
 this is a todo list made with react
 
+<img src="images/project/1.png">
+<img src="images/project/2.png">
+<img src="images/project/3.png">
+
 ## How to use!
 
 - `git clone https://github.com/Shubham-kpl/todolist` to clone repository to your device

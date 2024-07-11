@@ -2,9 +2,9 @@
 
 this is a todo list made with react
 
-<img src="images/project/1.png">
-<img src="images/project/2.png">
-<img src="images/project/3.png">
+<img src="src/images/project/1.png">
+<img src="src/images/project/2.png">
+<img src="src/images/project/3.png">
 
 ## How to use!
 

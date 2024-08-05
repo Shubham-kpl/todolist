@@ -19,7 +19,7 @@ button {
 }
 
 button:hover {
-    box-shadow: 6px 4px 10px darkcyan !important;
+    box-shadow: 0px 0px 7px darkcyan !important;
 }
 
 /* Miscellaneous */

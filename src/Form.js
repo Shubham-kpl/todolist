@@ -19,9 +19,18 @@ export default function ({
             className="form__input--task"
             autoComplete="off"
             autoFocus
+            placeholder="enter a task..."
           />{" "}
           <br />
           <span className="message--error hidden">Enter a valid task</span>
+        </div>{" "}
+        <div className="form__submit">
+          <button
+            onClick={handleFormSubmit}
+            className="button form__input--submit"
+          >
+            Add Item
+          </button>
         </div>
         {/* <div className="form__input">
           <input
@@ -37,14 +46,6 @@ export default function ({
           <br />
           <span className="message--error hidden">Enter a valid task</span>
         </div> */}
-        <div className="form__input">
-          <button
-            onClick={handleFormSubmit}
-            className="button form__input--submit"
-          >
-            Add Item
-          </button>
-        </div>
       </form>
     </>
   );

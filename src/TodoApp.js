@@ -200,15 +200,15 @@ export default function ToDoApp() {
   function formatDate(date) {
     if (new Date().toISOString().slice(0, 10) === date.slice(0, 10))
       return ` Today`;
-    if (
+    else if (
       new Date().toISOString().slice(0, 10) ===
       date.slice(0, 10) - 24 * 60 * 60
     )
       return ` Yesterday`;
     else
       return `
-    ${new Date(date).getDate()} / 
-    ${new Date(date).getMonth()} / 
+    ${`${new Date(date).getDate()}`.padStart(2, 0)} / 
+    ${`${new Date(date).getMonth() + 1}`.padStart(2, 0)} / 
     ${new Date(date).getFullYear()}`;
   }
 

@@ -2,6 +2,23 @@
 
 this is a todo list made with react
 
+## Goals for near future (one week)
+
+- input field
+- task EDIT (DELETE ONLY AFTER TASK GETS EDITED
+- OTHERWISE KEEP INTACT)
+- DATE ADDED TODAY (each just below one another)
+- noticeable hovering for buttons (up
+- down)
+- transition for up/down
+- TRANSITION FOR DELETING AN ITEM
+- SORTING BASED on different attributes (like name
+- date)
+- beautify sort button
+- ADD UNIFORMITY TO THE OVERALL COLOR STRUCTURE OF THE PAGE
+- TASK COMPLETED
+- SMOOTH TRANSITION FOR PINNING AN ITEM
+
 <img src="src/images/project/1.png">
 <img src="src/images/project/2.png">
 <img src="src/images/project/3.png">

@@ -18,6 +18,7 @@ this is a todo list made with react
 - ADD UNIFORMITY TO THE OVERALL COLOR STRUCTURE OF THE PAGE
 - TASK COMPLETED
 - SMOOTH TRANSITION FOR PINNING AN ITEM
+- DEPLOY IN OTHER PLATFORM (PAGES, RENDER, ETC)
 
 <img src="src/images/project/1.png">
 <img src="src/images/project/2.png">

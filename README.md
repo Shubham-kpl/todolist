@@ -48,3 +48,13 @@ this is a todo list made with react
 - rename todo list on clicking it
 - add due date (calendar in form)
 - form transition
+
+## Further
+
+1. why active class' color in the task is not fading after double clicking it
+2. why upon inputting empty task, it goes below
+3. line break class
+4. transition not workingin error message element
+5. handle arrow up , arrow down
+6. if format of new task changes, change the format of the existing tasks too
+7. can we pin an element by passing to a function

@@ -1,0 +1,5 @@
+// things learnt
+1. stringA.localCompare(stringB) => (stringA < stringB => 1)
+
+// doubts
+1. why setValue(value) does not works and setValue([...value]) does 

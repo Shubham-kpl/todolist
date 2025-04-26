@@ -7,6 +7,7 @@ this is a todo list made with react
 - input field
 - task EDIT (DELETE ONLY AFTER TASK GETS EDITED
 - OTHERWISE KEEP INTACT)
+- task completed date
 - DATE ADDED TODAY (each just below one another)
 - noticeable hovering for buttons (up
 - down)

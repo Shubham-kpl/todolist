@@ -19,7 +19,7 @@ const getLocalTasks = () => {
 let clickTimeout;
 let CLICK_DELAY = 250;
 
-export default function ToDoApp() {
+export default function Todoo() {
   let [task, setTask] = useState(``);
   let [tasks, setTasks] = useState(getLocalTasks());
 

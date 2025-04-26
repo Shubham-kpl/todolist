@@ -1,10 +1,4 @@
-todo.txt
 node_modules
-
-.gitignore
-.gitattributes
-
-.prettierc
 
 package-lock.json
 

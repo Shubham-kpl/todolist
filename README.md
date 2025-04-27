@@ -1,6 +1,7 @@
 # todolist
 
 this is a todo list made with react
+The website is live at https://www.todolist-pi-umber.vercel.app
 
 ## Goals for near future (one week)
 

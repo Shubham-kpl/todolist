@@ -1,7 +1,7 @@
 # todolist
 
 this is a todo list made with react
-The website is live at https://www.todolist-pi-umber.vercel.app
+The website is live at <a href="https://www.todolist-pi-umber.vercel.app">To-do-list-in-react</a>
 
 ## Goals for near future (one week)
 

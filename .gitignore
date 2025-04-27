@@ -1,3 +1,5 @@
-node_modules
+/node_modules
 
-TodoApp1.js
+/src/components/Todo2.js
+
+/learnings

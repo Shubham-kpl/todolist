@@ -4,6 +4,7 @@ This is a todo list made with react. The website is live at <a href="https://tod
 
 ## Goals for near future (one week)
 
+- Make it responsive for mobile
 - input field
 - task EDIT (DELETE ONLY AFTER TASK GETS EDITED
 - OTHERWISE KEEP INTACT)
